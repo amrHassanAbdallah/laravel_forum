@@ -16,7 +16,10 @@ Route::get('/', function () {
 });
 
 Route::get('/threads', 'ThreadController@index');
-Route::get('/threads/{thread}', 'ThreadController@show');
+Route::get('/threads/{thread}', [
+    'uses' => 'ThreadController@show',
+    'as' => 'threads.show'
+]);
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
