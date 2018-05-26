@@ -24,5 +24,8 @@ class ThreadsTest extends TestCase
         $response = $this->get('/threads');
         $response->assertStatus(200);
         $response->assertSee($thread->title);
+
+        $response = $this->get('/threads/' . $thread->id);
+        $response->assertSee($thread->title);
     }
 }
