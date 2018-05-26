@@ -28,4 +28,15 @@ class ThreadsTest extends TestCase
         $response = $this->get('/threads/' . $thread->id);
         $response->assertSee($thread->title);
     }
+
+
+    /**
+     * @test
+     */
+    public function a_user_can_read_a_thread()
+    {
+        $thread = factory('App\Thread')->create();
+        $response = $this->get('/threads/' . $thread->id);
+        $response->assertSee($thread->title);
+    }
 }
