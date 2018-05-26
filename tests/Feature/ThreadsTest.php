@@ -50,4 +50,9 @@ class ThreadsTest extends TestCase
             ->assertSee($reply->body);
 
     }
+
+    public function testCreator()
+    {
+        $this->assertInstanceOf('App\User', $this->thread->creator);
+    }
 }
