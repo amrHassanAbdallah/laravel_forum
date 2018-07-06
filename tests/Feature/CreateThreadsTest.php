@@ -20,9 +20,7 @@ class CreateThreadsTest extends TestCase
         $thread = factory('App\Thread')->make();
 
         $this->post('/threads', $thread->toArray());
-
-        $thread = Thread::where($thread->toArray())->first();
-        var_dump($thread);
+        $thread = Thread::latest()->first();
         $this->get(route('threads.show', $thread->id))
             ->assertSee($thread->title)
             ->assertSee($thread->body);

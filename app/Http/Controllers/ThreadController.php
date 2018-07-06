@@ -44,7 +44,7 @@ class ThreadController extends Controller
 
         ]);
 
-        return redirect(route('threads.show', $thread->id));
+        return redirect(route('threads.show', $thread->id))->with('thread', $thread);
     }
 
     /**
