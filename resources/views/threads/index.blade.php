@@ -11,6 +11,7 @@
                         @foreach($threads as $thread)
                             <article>
                                 <h4>
+
                                     <a href="{{route('threads.show',[$thread->channel->slug,$thread->id])}}">{{$thread->title}}</a>
                                 </h4>
                                 <div class="body">{{$thread->body}}</div>
