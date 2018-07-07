@@ -19,18 +19,11 @@ class CreateThreadsTest extends TestCase
         $thread = factory('App\Thread')->raw();
         $this->post('/threads', $thread);
 
-    }
-
-
-    /**
-     * @test
-     */
-    public function guests_cannot_see_the_create_thread_page()
-    {
         $this->expectException('Illuminate\Auth\AuthenticationException');
         $this->get(route('threads.create'))->assertRedirect('/login');
-
     }
+
+
 
     /**
      * @test
@@ -43,7 +36,8 @@ class CreateThreadsTest extends TestCase
 
         $this->post('/threads', $thread->toArray());
         $thread = Thread::latest()->first();
-        $this->get(route('threads.show', $thread->id))
+
+        $this->get(route('threads.show', [$thread->channel->slug, $thread->id]))
             ->assertSee($thread->title)
             ->assertSee($thread->body);
 

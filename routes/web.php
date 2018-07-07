@@ -18,15 +18,13 @@ Auth::routes();
 
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::resource('threads', 'ThreadController');
+Route::resource('threads', 'ThreadController', [
+    'except' => ['show']
+]);
+Route::get('threads/{channel}/{thread}', ["uses" => 'ThreadController@show', "as" => "threads.show"]);
 
 Route::post('/threads/{thread}/replies', [
     'uses' => 'ReplyController@store',
     'as' => 'replies.store'
 ]);
 
-
-Route::post('/replies/{reply}/favorites', [
-    'uses' => 'FavoritesController@store',
-    'as' => 'markAsFavorite'
-]);

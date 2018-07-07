@@ -10,7 +10,7 @@
 
 
             <div class="col-sm-2">
-                <form action="{{route('markAsFavorite',$reply->id)}}">
+                <form action="">
                     {{csrf_field()}}
                     <button type="submit" class="btn btn-default">favorite</button>
                 </form>

@@ -16,7 +16,7 @@ class ParticipateinForumTest extends TestCase
         $thread = factory('App\Thread')->create();
         $reply = factory('App\Reply')->make();
         $this->post('/threads/' . $thread->id . '/replies', $reply->toArray());
-        $this->get(route('threads.show', $thread->id))
+        $this->get(route('threads.show', [$thread->channel->slug, $thread->id]))
             ->assertSee($reply->body);
 
     }

@@ -26,7 +26,7 @@ class ThreadsTest extends TestCase
         $response->assertStatus(200);
         $response->assertSee($this->thread->title);
 
-        $response = $this->get('/threads/' . $this->thread->id);
+        $response = $this->get(route('threads.show', [$this->thread->channel->slug, $this->thread->id]));
         $response->assertSee($this->thread->title);
     }
 
@@ -36,7 +36,7 @@ class ThreadsTest extends TestCase
      */
     public function a_user_can_read_a_thread()
     {
-        $response = $this->get('/threads/' . $this->thread->id);
+        $response = $this->get(route('threads.show', [$this->thread->channel->slug, $this->thread->id]));
         $response->assertSee($this->thread->title);
     }
 
@@ -46,7 +46,7 @@ class ThreadsTest extends TestCase
     public function a_user_can_read_replies_that_are_associated_with_a_thread()
     {
         $reply = factory('App\Reply')->create(['thread_id' => $this->thread->id]);
-        $this->get(route('threads.show', $this->thread->id))
+        $this->get(route('threads.show', [$this->thread->channel->slug, $this->thread->id]))
             ->assertSee($reply->body);
 
     }
@@ -65,4 +65,17 @@ class ThreadsTest extends TestCase
         ]);
         $this->assertCount(1, $this->thread->replies);
     }
+
+
+    /**
+     * @test
+     */
+    public function a_thread_belongs_to_channel()
+    {
+        $thread = create('App\Thread')->channel;
+        $this->assertInstanceOf('App\Channel', $thread);
+
+    }
+
+
 }
