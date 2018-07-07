@@ -81,12 +81,11 @@ class ThreadsTest extends TestCase
     /**
      * @test
      */
-    public function a_user_can_filter_threads_according_to_a_tag()
+    public function a_user_can_filter_threads_according_to_a_channel()
     {
         $channel = create('App\Channel');
         $threadChannel = create('App\Thread', ['channel_id' => $channel->id]);
         $threadNotInChannel = create('App\Thread');
-
         $this->get(route('threads.channel', $channel->slug))
             ->assertSee($threadChannel->title)
             ->assertDontSee($threadNotInChannel->title);

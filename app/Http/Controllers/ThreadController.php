@@ -18,13 +18,12 @@ class ThreadController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($channelSlug = null)
+    public function index(Channel $channel)
     {
         $threads = null;
 
-        if ($channelSlug) {
-            $channelId = Channel::where("slug", $channelSlug)->first()->id;
-            $threads = Thread::where("channel_id", $channelId)->get();
+        if ($channel->exists) {
+            $threads = $channel->threads;
         } else {
             $threads = Thread::all();
         }
