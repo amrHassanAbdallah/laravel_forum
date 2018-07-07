@@ -12,12 +12,14 @@
                             {{csrf_field()}}
                             <div class="form-group">
                                 <label for="title">Title :</label>
-                                <input type="text" class="form-control" id="title" name="title">
+                                <input type="text" class="form-control" id="title" name="title"
+                                       value="{{old('title')}}">
                             </div>
 
                             <div class="form-group">
                                 <label for="body">body</label>
-                                <textarea name="body" id="body" cols="30" rows="10" class="form-control"></textarea>
+                                <textarea name="body" id="body" cols="30" rows="10"
+                                          class="form-control">{{old('body')}}</textarea>
                             </div>
                             <div class="form-group">
                                 <select name="channel_id">
