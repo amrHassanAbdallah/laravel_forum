@@ -28,3 +28,4 @@ Route::post('/threads/{thread}/replies', [
     'as' => 'replies.store'
 ]);
 
+Route::get('threads/{channel}', ["uses" => "ThreadController@index", "as" => "threads.channel"]);

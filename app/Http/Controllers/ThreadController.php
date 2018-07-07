@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Channel;
 use App\Thread;
 use Illuminate\Http\Request;
 
@@ -17,10 +18,16 @@ class ThreadController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($channelSlug = null)
     {
-        $threads = Thread::all();
+        $threads = null;
 
+        if ($channelSlug) {
+            $channelId = Channel::where("slug", $channelSlug)->first()->id;
+            $threads = Thread::where("channel_id", $channelId)->get();
+        } else {
+            $threads = Thread::all();
+        }
         return view('threads.index')->with('threads', $threads);
     }
 
@@ -31,7 +38,7 @@ class ThreadController extends Controller
      */
     public function create()
     {
-        return view('threads.create');
+        return view('threads.create')->with('channels', Channel::all());
     }
 
     /**
@@ -51,7 +58,7 @@ class ThreadController extends Controller
 
         ]);
 
-        return redirect(route('threads.show', [$thread->channel_id, $thread->id]))->with('thread', $thread);
+        return redirect(route('threads.show', [$thread->channel->slug, $thread->id]))->with('thread', $thread);
     }
 
     /**
