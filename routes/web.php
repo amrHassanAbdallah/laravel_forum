@@ -14,21 +14,19 @@
 Route::get('/', function () {
     return view('welcome');
 });
+Auth::routes();
 
-Route::get('/threads', 'ThreadController@index');
-Route::get('/threads/{thread}', [
-    'uses' => 'ThreadController@show',
-    'as' => 'threads.show'
-]);
+
+Route::get('/home', 'HomeController@index')->name('home');
+Route::resource('threads', 'ThreadController');
+
 Route::post('/threads/{thread}/replies', [
     'uses' => 'ReplyController@store',
     'as' => 'replies.store'
 ]);
 
-Route::post('/threads', [
-    'uses' => 'ThreadController@store',
-    'as' => 'threads.store'
-]);
-Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::post('/replies/{reply}/favorites', [
+    'uses' => 'FavoritesController@store',
+    'as' => 'markAsFavorite'
+]);

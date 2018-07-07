@@ -20,7 +20,8 @@
             <div class="col-md-2">
                 <div class="card">
                     <div class="card-body">
-                        This thread was published {{$thread->created_at->diffForHumans()}} by {{$reply->owner->name}} ,
+                        This thread was published {{$thread->created_at->diffForHumans()}} by {{$thread->creator->name}}
+                        ,
                         and currently has {{$thread->replies->count()}} comments
                     </div>
                 </div>
@@ -34,7 +35,7 @@
 
     <div class="container">
         <div class="row">
-            <div class="col-md-8" style="margin-top: 10px">
+            <div class="col-md-10" style="margin-top: 10px">
                 @if(auth()->check())
                     <form action="{{route('replies.store',$thread->id)}}" method="post">
                         {{csrf_field()}}
