@@ -13,18 +13,19 @@
                             <div class="form-group">
                                 <label for="title">Title :</label>
                                 <input type="text" class="form-control" id="title" name="title"
-                                       value="{{old('title')}}">
+                                       value="{{old('title')}}" required>
                             </div>
 
                             <div class="form-group">
                                 <label for="body">body</label>
                                 <textarea name="body" id="body" cols="30" rows="10"
-                                          class="form-control">{{old('body')}}</textarea>
+                                          class="form-control" required>{{old('body')}}</textarea>
                             </div>
                             <div class="form-group">
-                                <select name="channel_id">
+                                <select name="channel_id" class="form-control" required>
+                                    <option value="">Choose a channel</option>
                                     @foreach($channels as $channel)
-                                        <option value="{{$channel->id}}">{{$channel->slug}}</option>
+                                        <option value="{{$channel->id}}" {{old('channel_id') == $channel->id ?'selected':''}}>{{$channel->slug}}</option>
                                     @endforeach
                                 </select>
                             </div>
