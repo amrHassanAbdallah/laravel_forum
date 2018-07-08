@@ -35,7 +35,28 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <!-- Left Side Of Navbar -->
                 <ul class="navbar-nav mr-auto">
+                    @guest
                     <li><a class="nav-link" href="/threads"> All Threads</a></li>
+                    @else
+                        <li class="nav-item dropdown">
+                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
+                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                Threads<span class="caret"></span>
+                            </a>
+
+
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="{{ route('threads.index') }}">All Threads</a>
+                                <a class="dropdown-item"
+                                   href="{{ route('threads.index')."?username=".auth()->user()->name }}">My Threads</a>
+
+
+                            </div>
+
+
+                        </li>
+
+                    @endguest
                     <li><a class="nav-link" href="{{route('threads.create')}}"> New Thread</a></li>
 
                     <li class="nav-item dropdown">
