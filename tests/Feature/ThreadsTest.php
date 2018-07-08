@@ -2,11 +2,13 @@
 
 namespace Tests\Feature;
 
+use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Tests\TestCase;
 
 class ThreadsTest extends TestCase
 {
+    use DispatchesJobs;
     use DatabaseMigrations;
 
     public function setUp()
@@ -89,6 +91,24 @@ class ThreadsTest extends TestCase
         $this->get(route('threads.channel', $channel->slug))
             ->assertSee($threadChannel->title)
             ->assertDontSee($threadNotInChannel->title);
+    }
+
+
+    /**
+     * @test
+     */
+    public function a_user_can_filter_a_thread_by_user_name()
+    {
+        //filter the threads index with user name by visiting the threads index and return all threads by this user if exist if not return empty
+
+        //create thread with unique user
+        $this->singIn();
+        $thread = create('App\Thread', ["user_id" => auth()->id()]);
+        $threadNotCreatedByThisUser = create('App\Thread');
+        $this->json('get',
+            route('threads.index') . '?username=' . auth()->user()->name)->assertSee($thread->title)->assertDontSee($threadNotCreatedByThisUser->title);
+
+
     }
 
 
