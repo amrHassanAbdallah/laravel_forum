@@ -20,9 +20,10 @@
             <div class="col-md-2">
                 <div class="card">
                     <div class="card-body">
-                        This thread was published {{$thread->created_at->diffForHumans()}} by {{$thread->creator->name}}
+                        This thread was published {{$thread->created_at->diffForHumans()}} by <a
+                                href="#">{{$thread->creator->name}}</a>
                         ,
-                        and currently has {{$thread->replies->count()}} comments
+                        and currently has {{$thread->replies->count()}} {{str_plural('comment',$thread->replies_count)}}
                     </div>
                 </div>
             </div>
