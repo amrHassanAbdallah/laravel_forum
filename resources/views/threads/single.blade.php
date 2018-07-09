@@ -13,9 +13,10 @@
                         {{$thread->body}}
                     </div>
                 </div>
-                @foreach($thread->replies as $reply)
+                @foreach($replies as $reply)
                     @include('threads.reply')
                 @endforeach
+                {{$replies->links()}}
             </div>
             <div class="col-md-2">
                 <div class="card">
