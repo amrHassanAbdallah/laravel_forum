@@ -14,7 +14,7 @@ class ThreadsTest extends TestCase
     public function setUp()
     {
         parent::setUp();
-        $this->seed('ThreadsSeeder');
+        //$this->seed('ThreadsSeeder');
         $this->thread = factory('App\Thread')->create();
 
     }
@@ -109,6 +109,24 @@ class ThreadsTest extends TestCase
             route('threads.index') . '?username=' . auth()->user()->name)->assertSee($thread->title)->assertDontSee($threadNotCreatedByThisUser->title);
 
 
+    }
+
+    /**
+     * @test
+     */
+    public function a_user_can_filter_a_thread_by_popularity()
+    {
+        $threadWithTwoReplies = create('App\Thread');
+        create('App\Reply', ['thread_id' => $threadWithTwoReplies->id], 2);
+
+        $threadWithThreeReplies = create('App\Thread');
+        create('App\Reply', ['thread_id' => $threadWithThreeReplies->id], 3);
+
+        $threadWithNoReploes = $this->thread;
+
+        $response = $this->getJson('threads?popular=1')->json();
+
+        $this->assertEquals([3, 2, 0], array_column($response, 'replies_count'));
     }
 
 

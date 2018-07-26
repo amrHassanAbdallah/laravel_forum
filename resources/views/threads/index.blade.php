@@ -9,11 +9,22 @@
 
                     <div class="card-body">
                         @foreach($threads as $thread)
-                            <article>
-                                <h4>
 
-                                    <a href="{{route('threads.show',[$thread->channel->slug,$thread->id])}}">{{$thread->title}}</a>
-                                </h4>
+                            <article>
+                                <div class="row">
+                                    <div class="col-sm-10">
+                                        <h4>
+
+                                            <a href="{{route('threads.show',[$thread->channel->slug,$thread->id])}}">{{$thread->title}}</a>
+                                        </h4>
+                                    </div>
+
+                                    <div class="col-sm-2">
+                                        <strong>{{$thread->replies_count}} {{str_plural('reply',$thread->replies_count)}}</strong>
+
+                                    </div>
+
+                                </div>
                                 <div class="body">{{$thread->body}}</div>
                             </article>
                             <hr>

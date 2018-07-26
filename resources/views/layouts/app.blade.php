@@ -49,6 +49,8 @@
                                 <a class="dropdown-item" href="{{ route('threads.index') }}">All Threads</a>
                                 <a class="dropdown-item"
                                    href="{{ route('threads.index')."?username=".auth()->user()->name }}">My Threads</a>
+                                <a class="dropdown-item"
+                                   href="{{ route('threads.index')."?popular=1"}}">Popular threads</a>
 
 
                             </div>
