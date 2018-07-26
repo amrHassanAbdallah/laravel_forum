@@ -13,7 +13,7 @@
                 <form action="{{route('favorites.store',[$reply->id])}}" method="post">
                     {{csrf_field()}}
                     <button type="submit"
-                            class="btn btn-default" {{$reply->isFavorited()?'disabled':''}}>{{$reply->favorites_count}} {{str_plural('Favorite',$reply->favorites_count)}}</button>
+                            class="btn btn-default" {{$reply->isFavorited()?'disabled':''}}>{{$reply->favoritesCount()}} {{str_plural('Favorite',$reply->favoritesCount())}}</button>
                 </form>
             </div>
         </div>

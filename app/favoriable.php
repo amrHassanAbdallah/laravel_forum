@@ -25,4 +25,9 @@ trait favoriable
     {
         return $this->morphMany(Favorite::class, 'favorited');
     }
+
+    public function favoritesCount()
+    {
+        return $this->favorites->count();
+    }
 }
