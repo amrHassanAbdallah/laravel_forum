@@ -10,9 +10,10 @@
 
 
             <div class="col-sm-2">
-                <form action="">
+                <form action="{{route('favorites.store',[$reply->id])}}" method="post">
                     {{csrf_field()}}
-                    <button type="submit" class="btn btn-default">favorite</button>
+                    <button type="submit"
+                            class="btn btn-default" {{$reply->isFavorited()?'disabled':''}}>{{$reply->favorites->count()}} {{str_plural('Favorite',$reply->favorites->count())}}</button>
                 </form>
             </div>
         </div>
