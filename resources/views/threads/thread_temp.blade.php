@@ -5,7 +5,9 @@
                 <a
                         href="{{route('users.show',$thread->creator->name)}}">{{$thread->creator->name}}</a>
                 posted:
-                <legend>{{$thread->title}}</legend>
+                <legend>@if(\Request::route()->getName() != 'threads.show')<a
+                            href="{{route('threads.show',[$thread->channel->slug,$thread->id])}}">{{$thread->title}}</a>@else  {{$thread->title}} @endif
+                </legend>
             </div>
 
 
