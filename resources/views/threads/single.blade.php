@@ -4,17 +4,7 @@
     <div class="container">
         <div class="row ">
             <div class="col-md-10">
-                <div class="card">
-                    <div class="card-header"><a
-                                href="{{route('users.show',$thread->creator->name)}}">{{$thread->creator->name}}</a>
-                        posted:
-                        <legend>{{$thread->title}}</legend>
-                    </div>
-
-                    <div class="card-body">
-                        {{$thread->body}}
-                    </div>
-                </div>
+                @include('threads.thread_temp')
                 @foreach($replies as $reply)
                     @include('threads.reply')
                 @endforeach

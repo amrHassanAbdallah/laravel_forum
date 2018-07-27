@@ -13,6 +13,10 @@ class Thread extends Model
             $builder->withCount('replies');
         });
 
+        static::deleting(function ($thread) {
+            $thread->replies()->delete();
+        });
+
     }
     protected $guarded = [];
 

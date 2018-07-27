@@ -11,25 +11,7 @@
         <br>
         <br>
         @foreach($threads as $thread)
-            <div class="card">
-
-
-                <div class="card-header">
-                    <div class="row">
-                        <div class="col-md-10">
-                            posted:
-                            <legend>{{$thread->title}}</legend>
-                        </div>
-                        <div class="col-md-2">{{$thread->created_at->diffForHumans()}}</div>
-                    </div>
-
-                </div>
-
-                <div class="card-body">
-                    {{$thread->body}}
-                </div>
-            </div>
-
+            @include('threads.thread_temp')
         @endforeach
 
         {{$threads->links()}}
