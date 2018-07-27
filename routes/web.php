@@ -34,3 +34,8 @@ Route::post('replies/{reply}/favorites', [
     'uses' => 'FavoritesController@store',
     'as' => 'favorites.store'
 ]);
+
+Route::get('/profiles/{user}', [
+    'uses' => 'ProfilesController@show',
+    'as' => 'users.show'
+]);
