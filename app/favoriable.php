@@ -38,6 +38,6 @@ trait favoriable
 
     public function unfavorite()
     {
-        $this->favorites()->where(['user_id' => auth()->id()])->delete();
+        $this->favorites()->where(['user_id' => auth()->id()])->first()->delete();
     }
 }
