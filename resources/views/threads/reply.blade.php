@@ -38,13 +38,8 @@
 
             <div class="card-footer">
                 <button class="btn btn-xs d-inline-block" @click="editing=true"> Edit</button>
-                <form class="d-inline-block" action="{{route('replies.delete',$reply->id)}}" method="POST">
+                <button class="btn btn-danger btn-xs d-inline-block" @click="destroy"> Delete</button>
 
-                    {{csrf_field()}}
-                    {{method_field('DELETE')}}
-                    <button type="submit" class="btn btn-danger btn-xs"> Delete</button>
-
-                </form>
             </div>
         @endcan
     </div>

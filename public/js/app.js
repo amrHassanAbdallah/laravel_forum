@@ -5843,8 +5843,9 @@ function nodeName( elem, name ) {
 
   return elem.nodeName && elem.nodeName.toLowerCase() === name.toLowerCase();
 
-};
-var rsingleTag = ( /^<([a-z][^\/\0>:\x20\t\r\n\f]*)[\x20\t\r\n\f]*\/?>(?:<\/\1>|)$/i );
+}
+
+    var rsingleTag = (/^<([a-z][^\/\0>:\x20\t\r\n\f]*)[\x20\t\r\n\f]*\/?>(?:<\/\1>|)$/i);
 
 
 
@@ -13462,7 +13463,7 @@ function defaultClearTimeout () {
     } catch (e) {
         cachedClearTimeout = defaultClearTimeout;
     }
-} ())
+}());
 function runTimeout(fun) {
     if (cachedSetTimeout === setTimeout) {
         //normal enviroments in sane situations
@@ -13599,7 +13600,9 @@ process.emit = noop;
 process.prependListener = noop;
 process.prependOnceListener = noop;
 
-process.listeners = function (name) { return [] }
+        process.listeners = function (name) {
+            return []
+        };
 
 process.binding = function (name) {
     throw new Error('process.binding is not supported');
@@ -14309,7 +14312,7 @@ var config = ({
    * Exposed for legacy reasons
    */
   _lifecycleHooks: LIFECYCLE_HOOKS
-})
+});
 
 /*  */
 
@@ -14705,7 +14708,7 @@ methodsToPatch.forEach(function (method) {
       case 'push':
       case 'unshift':
         inserted = args;
-        break
+          break;
       case 'splice':
         inserted = args.slice(2);
         break
@@ -18887,11 +18890,11 @@ var KeepAlive = {
     }
     return vnode || (slot && slot[0])
   }
-}
+};
 
 var builtInComponents = {
   KeepAlive: KeepAlive
-}
+};
 
 /*  */
 
@@ -19266,7 +19269,7 @@ var ref = {
   destroy: function destroy (vnode) {
     registerRef(vnode, true);
   }
-}
+};
 
 function registerRef (vnode, isRemoval) {
   var key = vnode.data.ref;
@@ -20058,7 +20061,7 @@ var directives = {
   destroy: function unbindDirectives (vnode) {
     updateDirectives(vnode, emptyNode);
   }
-}
+};
 
 function updateDirectives (oldVnode, vnode) {
   if (oldVnode.data.directives || vnode.data.directives) {
@@ -20169,7 +20172,7 @@ function callHook$1 (dir, hook, vnode, oldVnode, isDestroy) {
 var baseModules = [
   ref,
   directives
-]
+];
 
 /*  */
 
@@ -20271,7 +20274,7 @@ function baseSetAttr (el, key, value) {
 var attrs = {
   create: updateAttrs,
   update: updateAttrs
-}
+};
 
 /*  */
 
@@ -20309,7 +20312,7 @@ function updateClass (oldVnode, vnode) {
 var klass = {
   create: updateClass,
   update: updateClass
-}
+};
 
 /*  */
 
@@ -20352,14 +20355,30 @@ function parseFilters (exp) {
       }
     } else {
       switch (c) {
-        case 0x22: inDouble = true; break         // "
-        case 0x27: inSingle = true; break         // '
-        case 0x60: inTemplateString = true; break // `
-        case 0x28: paren++; break                 // (
-        case 0x29: paren--; break                 // )
-        case 0x5B: square++; break                // [
-        case 0x5D: square--; break                // ]
-        case 0x7B: curly++; break                 // {
+          case 0x22:
+              inDouble = true;
+              break;         // "
+          case 0x27:
+              inSingle = true;
+              break;         // '
+          case 0x60:
+              inTemplateString = true;
+              break; // `
+          case 0x28:
+              paren++;
+              break;                 // (
+          case 0x29:
+              paren--;
+              break;                 // )
+          case 0x5B:
+              square++;
+              break;                // [
+          case 0x5D:
+              square--;
+              break;                // ]
+          case 0x7B:
+              curly++;
+              break;                 // {
         case 0x7D: curly--; break                 // }
       }
       if (c === 0x2f) { // /
@@ -20977,7 +20996,7 @@ function updateDOMListeners (oldVnode, vnode) {
 var events = {
   create: updateDOMListeners,
   update: updateDOMListeners
-}
+};
 
 /*  */
 
@@ -21071,7 +21090,7 @@ function isDirtyWithModifiers (elm, newVal) {
 var domProps = {
   create: updateDOMProps,
   update: updateDOMProps
-}
+};
 
 /*  */
 
@@ -21232,7 +21251,7 @@ function updateStyle (oldVnode, vnode) {
 var style = {
   create: updateStyle,
   update: updateStyle
-}
+};
 
 /*  */
 
@@ -21794,7 +21813,7 @@ var transition = inBrowser ? {
       rm();
     }
   }
-} : {}
+} : {};
 
 var platformModules = [
   attrs,
@@ -21803,7 +21822,7 @@ var platformModules = [
   domProps,
   style,
   transition
-]
+];
 
 /*  */
 
@@ -22014,12 +22033,12 @@ var show = {
       el.style.display = el.__vOriginalDisplay;
     }
   }
-}
+};
 
 var platformDirectives = {
   model: directive,
   show: show
-}
+};
 
 /*  */
 
@@ -22208,7 +22227,7 @@ var Transition = {
 
     return rawChild
   }
-}
+};
 
 /*  */
 
@@ -22349,7 +22368,7 @@ var TransitionGroup = {
       return (this._hasMove = info.hasTransform)
     }
   }
-}
+};
 
 function callPendingCbs (c) {
   /* istanbul ignore if */
@@ -22382,7 +22401,7 @@ function applyTranslation (c) {
 var platformComponents = {
   Transition: Transition,
   TransitionGroup: TransitionGroup
-}
+};
 
 /*  */
 
@@ -22529,7 +22548,7 @@ var klass$1 = {
   staticKeys: ['staticClass'],
   transformNode: transformNode,
   genData: genData
-}
+};
 
 /*  */
 
@@ -22573,7 +22592,7 @@ var style$1 = {
   staticKeys: ['staticStyle'],
   transformNode: transformNode$1,
   genData: genData$1
-}
+};
 
 /*  */
 
@@ -22585,7 +22604,7 @@ var he = {
     decoder.innerHTML = html;
     return decoder.textContent
   }
-}
+};
 
 /*  */
 
@@ -23649,13 +23668,13 @@ function cloneASTElement (el) {
 
 var model$2 = {
   preTransformNode: preTransformNode
-}
+};
 
 var modules$1 = [
   klass$1,
   style$1,
   model$2
-]
+];
 
 /*  */
 
@@ -23677,7 +23696,7 @@ var directives$1 = {
   model: model,
   text: text,
   html: html
-}
+};
 
 /*  */
 
@@ -23988,7 +24007,7 @@ var baseDirectives = {
   on: on,
   bind: bind$1,
   cloak: noop
-}
+};
 
 /*  */
 
@@ -24920,7 +24939,7 @@ function toComment(sourceMap) {
   Modified by Evan You @yyx990803
 */
 
-var hasDocument = typeof document !== 'undefined'
+        var hasDocument = typeof document !== 'undefined';
 
 if (typeof DEBUG !== 'undefined' && DEBUG) {
   if (!hasDocument) {
@@ -24930,7 +24949,7 @@ if (typeof DEBUG !== 'undefined' && DEBUG) {
   ) }
 }
 
-var listToStyles = __webpack_require__(45)
+        var listToStyles = __webpack_require__(45);
 
 /*
 type StyleObject = {
@@ -24951,44 +24970,46 @@ var stylesInDom = {/*
     refs: number,
     parts: Array<(obj?: StyleObjectPart) => void>
   }
-*/}
+*/
+};
 
-var head = hasDocument && (document.head || document.getElementsByTagName('head')[0])
-var singletonElement = null
-var singletonCounter = 0
-var isProduction = false
-var noop = function () {}
-var options = null
-var ssrIdKey = 'data-vue-ssr-id'
+        var head = hasDocument && (document.head || document.getElementsByTagName('head')[0]);
+        var singletonElement = null;
+        var singletonCounter = 0;
+        var isProduction = false;
+        var noop = function () {
+        };
+        var options = null;
+        var ssrIdKey = 'data-vue-ssr-id';
 
 // Force single-tag solution on IE6-9, which has a hard limit on the # of <style>
 // tags it will allow on a page
-var isOldIE = typeof navigator !== 'undefined' && /msie [6-9]\b/.test(navigator.userAgent.toLowerCase())
+        var isOldIE = typeof navigator !== 'undefined' && /msie [6-9]\b/.test(navigator.userAgent.toLowerCase());
 
 module.exports = function (parentId, list, _isProduction, _options) {
-  isProduction = _isProduction
+    isProduction = _isProduction;
 
-  options = _options || {}
+    options = _options || {};
 
-  var styles = listToStyles(parentId, list)
-  addStylesToDom(styles)
+    var styles = listToStyles(parentId, list);
+    addStylesToDom(styles);
 
   return function update (newList) {
-    var mayRemove = []
+      var mayRemove = [];
     for (var i = 0; i < styles.length; i++) {
-      var item = styles[i]
-      var domStyle = stylesInDom[item.id]
-      domStyle.refs--
+        var item = styles[i];
+        var domStyle = stylesInDom[item.id];
+        domStyle.refs--;
       mayRemove.push(domStyle)
     }
     if (newList) {
-      styles = listToStyles(parentId, newList)
+        styles = listToStyles(parentId, newList);
       addStylesToDom(styles)
     } else {
       styles = []
     }
     for (var i = 0; i < mayRemove.length; i++) {
-      var domStyle = mayRemove[i]
+        var domStyle = mayRemove[i];
       if (domStyle.refs === 0) {
         for (var j = 0; j < domStyle.parts.length; j++) {
           domStyle.parts[j]()
@@ -24997,14 +25018,14 @@ module.exports = function (parentId, list, _isProduction, _options) {
       }
     }
   }
-}
+};
 
 function addStylesToDom (styles /* Array<StyleObject> */) {
   for (var i = 0; i < styles.length; i++) {
-    var item = styles[i]
-    var domStyle = stylesInDom[item.id]
+      var item = styles[i];
+      var domStyle = stylesInDom[item.id];
     if (domStyle) {
-      domStyle.refs++
+        domStyle.refs++;
       for (var j = 0; j < domStyle.parts.length; j++) {
         domStyle.parts[j](item.parts[j])
       }
@@ -25015,7 +25036,7 @@ function addStylesToDom (styles /* Array<StyleObject> */) {
         domStyle.parts.length = item.parts.length
       }
     } else {
-      var parts = []
+        var parts = [];
       for (var j = 0; j < item.parts.length; j++) {
         parts.push(addStyle(item.parts[j]))
       }
@@ -25025,15 +25046,15 @@ function addStylesToDom (styles /* Array<StyleObject> */) {
 }
 
 function createStyleElement () {
-  var styleElement = document.createElement('style')
-  styleElement.type = 'text/css'
-  head.appendChild(styleElement)
+    var styleElement = document.createElement('style');
+    styleElement.type = 'text/css';
+    head.appendChild(styleElement);
   return styleElement
 }
 
 function addStyle (obj /* StyleObjectPart */) {
-  var update, remove
-  var styleElement = document.querySelector('style[' + ssrIdKey + '~="' + obj.id + '"]')
+    var update, remove;
+    var styleElement = document.querySelector('style[' + ssrIdKey + '~="' + obj.id + '"]');
 
   if (styleElement) {
     if (isProduction) {
@@ -25052,20 +25073,20 @@ function addStyle (obj /* StyleObjectPart */) {
 
   if (isOldIE) {
     // use singleton mode for IE9.
-    var styleIndex = singletonCounter++
-    styleElement = singletonElement || (singletonElement = createStyleElement())
-    update = applyToSingletonTag.bind(null, styleElement, styleIndex, false)
+      var styleIndex = singletonCounter++;
+      styleElement = singletonElement || (singletonElement = createStyleElement());
+      update = applyToSingletonTag.bind(null, styleElement, styleIndex, false);
     remove = applyToSingletonTag.bind(null, styleElement, styleIndex, true)
   } else {
     // use multi-style-tag mode in all other cases
-    styleElement = createStyleElement()
-    update = applyToTag.bind(null, styleElement)
+      styleElement = createStyleElement();
+      update = applyToTag.bind(null, styleElement);
     remove = function () {
       styleElement.parentNode.removeChild(styleElement)
     }
   }
 
-  update(obj)
+    update(obj);
 
   return function updateStyle (newObj /* StyleObjectPart */) {
     if (newObj) {
@@ -25082,23 +25103,23 @@ function addStyle (obj /* StyleObjectPart */) {
 }
 
 var replaceText = (function () {
-  var textStore = []
+    var textStore = [];
 
   return function (index, replacement) {
-    textStore[index] = replacement
+      textStore[index] = replacement;
     return textStore.filter(Boolean).join('\n')
   }
-})()
+})();
 
 function applyToSingletonTag (styleElement, index, remove, obj) {
-  var css = remove ? '' : obj.css
+    var css = remove ? '' : obj.css;
 
   if (styleElement.styleSheet) {
     styleElement.styleSheet.cssText = replaceText(index, css)
   } else {
-    var cssNode = document.createTextNode(css)
-    var childNodes = styleElement.childNodes
-    if (childNodes[index]) styleElement.removeChild(childNodes[index])
+      var cssNode = document.createTextNode(css);
+      var childNodes = styleElement.childNodes;
+      if (childNodes[index]) styleElement.removeChild(childNodes[index]);
     if (childNodes.length) {
       styleElement.insertBefore(cssNode, childNodes[index])
     } else {
@@ -25108,9 +25129,9 @@ function applyToSingletonTag (styleElement, index, remove, obj) {
 }
 
 function applyToTag (styleElement, obj) {
-  var css = obj.css
-  var media = obj.media
-  var sourceMap = obj.sourceMap
+    var css = obj.css;
+    var media = obj.media;
+    var sourceMap = obj.sourceMap;
 
   if (media) {
     styleElement.setAttribute('media', media)
@@ -25122,7 +25143,7 @@ function applyToTag (styleElement, obj) {
   if (sourceMap) {
     // https://developer.chrome.com/devtools/docs/javascript-debugging
     // this makes source maps inside style tags work properly in Chrome
-    css += '\n/*# sourceURL=' + sourceMap.sources[0] + ' */'
+      css += '\n/*# sourceURL=' + sourceMap.sources[0] + ' */';
     // http://stackoverflow.com/a/26603875
     css += '\n/*# sourceMappingURL=data:application/json;base64,' + btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap)))) + ' */'
   }
@@ -25156,25 +25177,25 @@ module.exports = function normalizeComponent (
   scopeId,
   moduleIdentifier /* server only */
 ) {
-  var esModule
-  var scriptExports = rawScriptExports = rawScriptExports || {}
+    var esModule;
+    var scriptExports = rawScriptExports = rawScriptExports || {};
 
   // ES6 modules interop
-  var type = typeof rawScriptExports.default
+    var type = typeof rawScriptExports.default;
   if (type === 'object' || type === 'function') {
-    esModule = rawScriptExports
+      esModule = rawScriptExports;
     scriptExports = rawScriptExports.default
   }
 
   // Vue.extend constructor export interop
   var options = typeof scriptExports === 'function'
     ? scriptExports.options
-    : scriptExports
+      : scriptExports;
 
   // render functions
   if (compiledTemplate) {
-    options.render = compiledTemplate.render
-    options.staticRenderFns = compiledTemplate.staticRenderFns
+      options.render = compiledTemplate.render;
+      options.staticRenderFns = compiledTemplate.staticRenderFns;
     options._compiled = true
   }
 
@@ -25188,14 +25209,14 @@ module.exports = function normalizeComponent (
     options._scopeId = scopeId
   }
 
-  var hook
+    var hook;
   if (moduleIdentifier) { // server build
     hook = function (context) {
       // 2.3 injection
       context =
         context || // cached call
         (this.$vnode && this.$vnode.ssrContext) || // stateful
-        (this.parent && this.parent.$vnode && this.parent.$vnode.ssrContext) // functional
+          (this.parent && this.parent.$vnode && this.parent.$vnode.ssrContext); // functional
       // 2.2 with runInNewContext: true
       if (!context && typeof __VUE_SSR_CONTEXT__ !== 'undefined') {
         context = __VUE_SSR_CONTEXT__
@@ -25208,7 +25229,7 @@ module.exports = function normalizeComponent (
       if (context && context._registeredComponents) {
         context._registeredComponents.add(moduleIdentifier)
       }
-    }
+    };
     // used by ssr in case component is cached and beforeCreate
     // never gets called
     options._ssrRegister = hook
@@ -25217,10 +25238,10 @@ module.exports = function normalizeComponent (
   }
 
   if (hook) {
-    var functional = options.functional
+      var functional = options.functional;
     var existing = functional
       ? options.render
-      : options.beforeCreate
+        : options.beforeCreate;
 
     if (!functional) {
       // inject component registration as beforeCreate hook
@@ -25230,10 +25251,10 @@ module.exports = function normalizeComponent (
     } else {
       // for template-only hot-reload because in that case the render fn doesn't
       // go through the normalizer
-      options._injectStyles = hook
+        options._injectStyles = hook;
       // register for functioal component in vue file
       options.render = function renderWithStyleInjection (h, context) {
-        hook.call(context)
+          hook.call(context);
         return existing(h, context)
       }
     }
@@ -25343,17 +25364,11 @@ window.flash = function (message) {
 /* 18 */
 /***/ (function(module, exports, __webpack_require__) {
 
-/* WEBPACK VAR INJECTION */(function(global, module) {var __WEBPACK_AMD_DEFINE_RESULT__;/**
- * @license
- * Lodash <https://lodash.com/>
- * Copyright JS Foundation and other contributors <https://js.foundation/>
- * Released under MIT license <https://lodash.com/license>
- * Based on Underscore.js 1.8.3 <http://underscorejs.org/LICENSE>
- * Copyright Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
- */
-;(function() {
-
-  /** Used as a safe reference for `undefined` in pre-ES5 environments. */
+        /* WEBPACK VAR INJECTION */
+        (function (global, module) {
+            var __WEBPACK_AMD_DEFINE_RESULT__;
+            (function () {
+                /** Used as a safe reference for `undefined` in pre-ES5 environments. */
   var undefined;
 
   /** Used as the semantic version number. */
@@ -46510,7 +46525,7 @@ module.exports.default = axios;
 // Object.prototype.constructor. Remove this eventually
 module.exports = function (obj) {
   return obj != null && (isBuffer(obj) || isSlowBuffer(obj) || !!obj._isBuffer)
-}
+};
 
 function isBuffer (obj) {
   return !!obj.constructor && typeof obj.constructor.isBuffer === 'function' && obj.constructor.isBuffer(obj)
@@ -47585,24 +47600,25 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
 /* 42 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var disposed = false
+        var disposed = false;
 function injectStyle (ssrContext) {
-  if (disposed) return
+    if (disposed) return;
   __webpack_require__(43)
 }
-var normalizeComponent = __webpack_require__(14)
+
+        var normalizeComponent = __webpack_require__(14);
 /* script */
-var __vue_script__ = __webpack_require__(46)
+        var __vue_script__ = __webpack_require__(46);
 /* template */
-var __vue_template__ = __webpack_require__(47)
+        var __vue_template__ = __webpack_require__(47);
 /* template functional */
-var __vue_template_functional__ = false
+        var __vue_template_functional__ = false;
 /* styles */
-var __vue_styles__ = injectStyle
+        var __vue_styles__ = injectStyle;
 /* scopeId */
-var __vue_scopeId__ = null
+        var __vue_scopeId__ = null;
 /* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
+        var __vue_module_identifier__ = null;
 var Component = normalizeComponent(
   __vue_script__,
   __vue_template__,
@@ -47610,15 +47626,15 @@ var Component = normalizeComponent(
   __vue_styles__,
   __vue_scopeId__,
   __vue_module_identifier__
-)
-Component.options.__file = "resources/assets/js/components/Flash.vue"
+);
+        Component.options.__file = "resources/assets/js/components/Flash.vue";
 
 /* hot reload */
 if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
+    var hotAPI = require("vue-hot-reload-api");
+    hotAPI.install(require("vue"), false);
+    if (!hotAPI.compatible) return;
+    module.hot.accept();
   if (!module.hot.data) {
     hotAPI.createRecord("data-v-03030049", Component.options)
   } else {
@@ -47681,20 +47697,20 @@ exports.push([module.i, "\n.alert-flash {\n    position: fixed;\n    right: 25px
  * easier to manipulate.
  */
 module.exports = function listToStyles (parentId, list) {
-  var styles = []
-  var newStyles = {}
+    var styles = [];
+    var newStyles = {};
   for (var i = 0; i < list.length; i++) {
-    var item = list[i]
-    var id = item[0]
-    var css = item[1]
-    var media = item[2]
-    var sourceMap = item[3]
+      var item = list[i];
+      var id = item[0];
+      var css = item[1];
+      var media = item[2];
+      var sourceMap = item[3];
     var part = {
       id: parentId + ':' + i,
       css: css,
       media: media,
       sourceMap: sourceMap
-    }
+    };
     if (!newStyles[id]) {
       styles.push(newStyles[id] = { id: id, parts: [part] })
     } else {
@@ -47761,9 +47777,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
+    var _vm = this;
+    var _h = _vm.$createElement;
+    var _c = _vm._self._c || _h;
   return _c(
     "div",
     {
@@ -47774,12 +47790,12 @@ var render = function() {
     },
     [_c("strong", [_vm._v("Success!")]), _vm._v(" " + _vm._s(_vm.body) + "\n")]
   )
-}
-var staticRenderFns = []
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
+};
+        var staticRenderFns = [];
+        render._withStripped = true;
+        module.exports = {render: render, staticRenderFns: staticRenderFns};
 if (false) {
-  module.hot.accept()
+    module.hot.accept();
   if (module.hot.data) {
     require("vue-hot-reload-api")      .rerender("data-v-03030049", module.exports)
   }
@@ -47789,20 +47805,20 @@ if (false) {
 /* 48 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var disposed = false
-var normalizeComponent = __webpack_require__(14)
+        var disposed = false;
+        var normalizeComponent = __webpack_require__(14);
 /* script */
-var __vue_script__ = __webpack_require__(51)
+        var __vue_script__ = __webpack_require__(51);
 /* template */
-var __vue_template__ = null
+        var __vue_template__ = null;
 /* template functional */
-var __vue_template_functional__ = false
+        var __vue_template_functional__ = false;
 /* styles */
-var __vue_styles__ = null
+        var __vue_styles__ = null;
 /* scopeId */
-var __vue_scopeId__ = null
+        var __vue_scopeId__ = null;
 /* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
+        var __vue_module_identifier__ = null;
 var Component = normalizeComponent(
   __vue_script__,
   __vue_template__,
@@ -47810,15 +47826,15 @@ var Component = normalizeComponent(
   __vue_styles__,
   __vue_scopeId__,
   __vue_module_identifier__
-)
-Component.options.__file = "resources/assets/js/components/Reply.vue"
+);
+        Component.options.__file = "resources/assets/js/components/Reply.vue";
 
 /* hot reload */
 if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
+    var hotAPI = require("vue-hot-reload-api");
+    hotAPI.install(require("vue"), false);
+    if (!hotAPI.compatible) return;
+    module.hot.accept();
   if (!module.hot.data) {
     hotAPI.createRecord("data-v-2d8b1643", Component.options)
   } else {
@@ -47840,7 +47856,6 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: ['attributes'],
@@ -47860,6 +47875,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             });
             this.editing = false;
             flash('Updated !');
+        },
+        destroy: function destroy() {
+            axios.delete('/replies/' + this.attributes.id);
+            $(this.$el).fadeOut(300, function () {
+                flash('Your reply has been deleted . ');
+            });
+            /*
+                            document.getElementById('reply-'+this.attributes.id).remove();
+            */
         }
     }
 
