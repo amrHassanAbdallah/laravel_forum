@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Activity;
 use App\User;
 use Illuminate\Http\Request;
 
@@ -51,7 +52,7 @@ class ProfilesController extends Controller
         return view('profiles.show')->with([
             'userProfile' => $user,
             'threads' => $user->threads()->paginate(10),
-            'activities' => $this->getActivities($user)
+            'activities' => Activity::feed($user->id)
 
         ]);
     }
@@ -90,14 +91,5 @@ class ProfilesController extends Controller
         //
     }
 
-    /**
-     * @param User $user
-     * @return \Illuminate\Database\Eloquent\Collection|\Illuminate\Support\Collection
-     */
-    protected function getActivities(User $user)
-    {
-        return $user->activity()->with('subject')->latest()->get()->groupBy(function ($activity) {
-            return $activity->created_at->format("Y-m-d");
-        });
-    }
+
 }
