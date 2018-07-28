@@ -26,4 +26,17 @@
             <hr>
 
         </div>
+    @can('update',$reply)
+
+        <div class="card-footer">
+
+            <form action="{{route('replies.delete',$reply->id)}}" method="POST">
+
+                {{csrf_field()}}
+                {{method_field('DELETE')}}
+                <button type="submit" class="btn btn-danger btn-xs"> Delete</button>
+
+            </form>
+        </div>
+    @endcan
     </div>

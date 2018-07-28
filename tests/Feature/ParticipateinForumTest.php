@@ -20,4 +20,54 @@ class ParticipateinForumTest extends TestCase
             ->assertSee($reply->body);
 
     }
+
+
+    /**
+     * @test
+     */
+    public function unauth_users_cannot_delete_a_reply()
+    {
+        $this->expectException('Illuminate\Auth\AuthenticationException');
+
+        $reply = create('App\Reply');
+
+        $this->delete("/replies/{$reply->id}")
+            ->assertRedirect('login');
+
+    }
+
+
+    /**
+     * @test
+     */
+    public function a_user_can_not_delete_a_reply_does_not_belong_to_him()
+    {
+        $this->expectException('Illuminate\Auth\Access\AuthorizationException');
+
+        $reply = create('App\Reply');
+
+        $this->singIn()
+            ->delete("/replies/{$reply->id}")
+            ->assertStatus(403);
+
+    }
+
+
+    /**
+     * @test
+     */
+    public function auth_user_delete_his_reply()
+    {
+        $this->singIn();
+
+        $reply = create('App\Reply', ["user_id" => auth()->id()]);
+
+        $this->delete("/replies/{$reply->id}")
+            ->assertStatus(302);
+
+        $this->assertDatabaseMissing('replies', $reply->toArray());
+
+    }
+
+
 }
