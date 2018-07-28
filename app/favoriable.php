@@ -26,8 +26,18 @@ trait favoriable
         return $this->morphMany(Favorite::class, 'favorited');
     }
 
-    public function favoritesCount()
+    public function getFavoritesCountAttribute()
     {
         return $this->favorites->count();
+    }
+
+    public function getIsFavoritedAttribute()
+    {
+        return $this->isFavorited();
+    }
+
+    public function unfavorite()
+    {
+        $this->favorites()->where(['user_id' => auth()->id()])->delete();
     }
 }

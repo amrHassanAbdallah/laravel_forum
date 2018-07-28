@@ -11,14 +11,16 @@
 
                 </div>
 
-
-                <div class="col-sm-2">
-                    <form action="{{route('favorites.store',[$reply->id])}}" method="post">
-                        {{csrf_field()}}
-                        <button type="submit"
-                                class="btn btn-default" {{$reply->isFavorited()?'disabled':''}}>{{$reply->favoritesCount()}} {{str_plural('Favorite',$reply->favoritesCount())}}</button>
-                    </form>
-                </div>
+                <favorite :reply="{{$reply}}"></favorite>
+                {{--
+                                <div class="col-sm-2">
+                                    <form action="{{route('favorites.store',[$reply->id])}}" method="post">
+                                        {{csrf_field()}}
+                                        <button type="submit"
+                                                class="btn btn-default" {{$reply->isFavorited()?'disabled':''}}>{{$reply->favoritesCount()}} {{str_plural('Favorite',$reply->favoritesCount())}}</button>
+                                    </form>
+                                </div>
+                --}}
             </div>
         </div>
 

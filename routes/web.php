@@ -44,6 +44,10 @@ Route::post('replies/{reply}/favorites', [
     'uses' => 'FavoritesController@store',
     'as' => 'favorites.store'
 ]);
+Route::delete('replies/{reply}/favorites', [
+    'uses' => 'FavoritesController@destroy',
+    'as' => 'favorites.delete'
+]);
 
 Route::get('/profiles/{user}', [
     'uses' => 'ProfilesController@show',
