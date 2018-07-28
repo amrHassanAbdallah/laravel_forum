@@ -10,10 +10,15 @@
         </div>
         <br>
         <br>
-        @foreach($threads as $thread)
-            @include('threads.thread_temp')
+        @foreach($activities as $date => $activity)
+            <h3 class="page-header*"> {{$date}} </h3>
+            <br>
+            @foreach($activity as $record)
+                @include("profiles.activities.{$record->type}",['activity'=>$record])
+        @endforeach
+            <br>
+            <br>
         @endforeach
 
-        {{$threads->links()}}
     </div>
 @endsection

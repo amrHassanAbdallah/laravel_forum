@@ -42,6 +42,7 @@ class Thread extends Model
         return $this->belongsTo(Channel::class);
     }
 
+
     public static function filter($query, $filters)
     {
         return $filters->apply($query);

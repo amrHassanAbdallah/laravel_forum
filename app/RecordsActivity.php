@@ -36,7 +36,7 @@ trait RecordsActivity
 
     public function activity()
     {
-        return $this->morphMany('App\Activity', 'subject');
+        return $this->morphMany(Activity::class, 'subject');
     }
 
     /**

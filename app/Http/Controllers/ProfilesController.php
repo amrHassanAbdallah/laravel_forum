@@ -46,7 +46,14 @@ class ProfilesController extends Controller
      */
     public function show(User $user)
     {
-        return view('profiles.show')->with(['userProfile' => $user, 'threads' => $user->threads()->paginate(10)]);
+
+
+        return view('profiles.show')->with([
+            'userProfile' => $user,
+            'threads' => $user->threads()->paginate(10),
+            'activities' => $this->getActivities($user)
+
+        ]);
     }
 
     /**
@@ -81,5 +88,16 @@ class ProfilesController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    /**
+     * @param User $user
+     * @return \Illuminate\Database\Eloquent\Collection|\Illuminate\Support\Collection
+     */
+    protected function getActivities(User $user)
+    {
+        return $user->activity()->with('subject')->latest()->get()->groupBy(function ($activity) {
+            return $activity->created_at->format("Y-m-d");
+        });
     }
 }
