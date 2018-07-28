@@ -33,6 +33,10 @@ Route::delete('/replies/{reply}', [
     'as' => 'replies.delete'
 ]);
 
+Route::patch('/replies/{reply}', [
+    'uses' => 'ReplyController@update',
+    'as' => 'replies.update'
+]);
 
 Route::get('threads/{channel}', ["uses" => "ThreadController@index", "as" => "threads.channel"]);
 

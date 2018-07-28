@@ -52,6 +52,20 @@ class ParticipateinForumTest extends TestCase
 
     }
 
+    /**
+     * @test
+     */
+    public function a_user_can_not_update_a_reply_does_not_belong_to_him()
+    {
+        $this->expectException('Illuminate\Auth\Access\AuthorizationException');
+
+        $reply = create('App\Reply');
+
+        $this->singIn()
+            ->delete("/replies/{$reply->id}")
+            ->assertStatus(403);
+
+    }
 
     /**
      * @test
@@ -66,6 +80,21 @@ class ParticipateinForumTest extends TestCase
             ->assertStatus(302);
 
         $this->assertDatabaseMissing('replies', $reply->toArray());
+
+    }
+
+
+    /**
+     * @test
+     */
+    public function auth_users_can_update_replies()
+    {
+        $this->singIn();
+
+        $reply = create('App\Reply', ["user_id" => auth()->id()]);
+        $updatedReply = 'You been changed , fool';
+        $this->patch("/replies/{$reply->id}", ['body' => $updatedReply]);
+        $this->assertDatabaseHas('replies', ['id' => $reply->id, 'body' => $updatedReply]);
 
     }
 
