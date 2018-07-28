@@ -10,8 +10,9 @@
                     said {{$reply->created_at->diffForHumans()}}
 
                 </div>
-
+                @if(Auth::check())
                 <favorite :reply="{{$reply}}"></favorite>
+                @endif
                 {{--
                                 <div class="col-sm-2">
                                     <form action="{{route('favorites.store',[$reply->id])}}" method="post">

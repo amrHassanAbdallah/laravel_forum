@@ -6,6 +6,12 @@ namespace App;
 
 trait favoriable
 {
+    protected static function bootfavoriable()
+    {
+        static::deleting(function ($model) {
+            $model->favorites->each->delete();
+        });
+    }
 
     public function favorite()
     {
