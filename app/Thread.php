@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Thread extends Model
 {
+    use RecordsActivity;
     protected static function boot()
     {
         parent::boot();
@@ -16,6 +17,7 @@ class Thread extends Model
         static::deleting(function ($thread) {
             $thread->replies()->delete();
         });
+
 
     }
     protected $guarded = [];
@@ -44,4 +46,5 @@ class Thread extends Model
     {
         return $filters->apply($query);
     }
+
 }
