@@ -63,7 +63,10 @@ class ThreadController extends Controller
 
         ]);
 
-        return redirect(route('threads.show', [$thread->channel->slug, $thread->id]))->with('thread', $thread);
+        return redirect(route('threads.show', [$thread->channel->slug, $thread->id]))->with([
+            'thread' => $thread,
+            'flash' => 'Your thread has been published ! '
+        ]);
     }
 
     /**

@@ -26,6 +26,7 @@
     <main class="py-4">
         @include('layouts.notification')
         @yield('content')
+        <flash message="{{session('flash')}}"></flash>
     </main>
 </div>
 </body>
