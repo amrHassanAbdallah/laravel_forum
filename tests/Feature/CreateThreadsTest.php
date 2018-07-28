@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Activity;
 use App\Thread;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Tests\TestCase;
@@ -22,7 +23,6 @@ class CreateThreadsTest extends TestCase
         $this->expectException('Illuminate\Auth\AuthenticationException');
         $this->get(route('threads.create'))->assertRedirect('/login');
     }
-
 
 
     /**
@@ -66,6 +66,7 @@ class CreateThreadsTest extends TestCase
     public function a_auth_user_can_delete_a_thread()
     {
         $this->singIn();
+
         $thread = create('App\Thread', ['user_id' => auth()->id()]);
         $reply = create('App\Reply', ['thread_id' => $thread->id]);
 
@@ -73,11 +74,18 @@ class CreateThreadsTest extends TestCase
 
         $this->assertDatabaseMissing('threads', $thread->toArray());
         $this->assertDatabaseMissing('replies', $reply->toArray());
+        $this->assertDatabaseMissing('activities', [
+            'subject_id' => $thread->id,
+            'subject_type' => get_class($thread)
+        ]);
 
+        $this->assertDatabaseMissing('activities', [
+            'subject_id' => $reply->id,
+            'subject_type' => get_class($reply)
+        ]);
 
+        $this->assertEquals(0, Activity::count());
     }
-
-
 
 
 }
