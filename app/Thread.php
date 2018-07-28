@@ -48,4 +48,8 @@ class Thread extends Model
         return $filters->apply($query);
     }
 
+    public function path()
+    {
+        return route('threads.show', [$this->channel->slug, $this->id]);
+    }
 }
