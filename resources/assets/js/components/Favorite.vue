@@ -5,7 +5,7 @@
         <button type="submit"
                 class="btn btn-default" @click="toggle">
             <span :class="classes"></span>
-            <span v-text="favoritesCount"></span>
+            <span v-text="count"></span>
         </button>
     </div>
 
@@ -17,13 +17,13 @@
         props: ['reply'],
         data() {
             return {
-                favoritesCount: this.reply.favoritesCount,
-                isFavorited: this.reply.isFavorited
+                count: this.reply.favoritesCount,
+                active: this.reply.isFavorited
             }
         },
         computed: {
             classes() {
-                return ['fa ', this.isFavorited ? ' fa-heart' : ' fa-heart-o'];
+                return ['fa ', this.active ? ' fa-heart' : ' fa-heart-o'];
             },
             endpoint() {
                 return '/replies/' + this.reply.id + '/favorites';
@@ -34,17 +34,17 @@
         },
         methods: {
             toggle() {
-                this.isFavorited ? this.destroy() : this.create();
+                this.active ? this.destroy() : this.create();
             },
             create() {
                 axios.post(this.endpoint);
-                this.isFavorited = true;
-                this.favoritesCount++;
+                this.active = true;
+                this.count++;
             },
             destroy() {
                 axios.delete(this.endpoint);
-                this.isFavorited = false;
-                this.favoritesCount--;
+                this.active = false;
+                this.count--;
             }
 
 

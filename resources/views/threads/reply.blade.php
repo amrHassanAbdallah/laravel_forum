@@ -18,7 +18,7 @@
                                     <form action="{{route('favorites.store',[$reply->id])}}" method="post">
                                         {{csrf_field()}}
                                         <button type="submit"
-                                                class="btn btn-default" {{$reply->isFavorited()?'disabled':''}}>{{$reply->favoritesCount()}} {{str_plural('Favorite',$reply->favoritesCount())}}</button>
+                                                class="btn btn-default" {{$reply->active()?'disabled':''}}>{{$reply->count()}} {{str_plural('Favorite',$reply->count())}}</button>
                                     </form>
                                 </div>
                 --}}
