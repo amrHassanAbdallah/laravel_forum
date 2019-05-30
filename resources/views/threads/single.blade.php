@@ -6,7 +6,7 @@
             <div class="row ">
                 <div class="col-md-10">
                     @include('threads.thread_temp')
-                    <replies :data="{{$thread->replies}}" @removed="repliesCount--"></replies>
+                    <replies :data="{{$thread->replies}}" @removed="repliesCount--" @added="repliesCount++"></replies>
                     {{--    @foreach($replies as $reply)
                             @include('threads.reply')
                         @endforeach
@@ -31,29 +31,6 @@
 
         </div>
 
-        <div class="container">
-            <div class="row">
-                <div class="col-md-10" style="margin-top: 10px">
-                    <div v-if="signedIn">
-                        <form action="{{route('replies.store',$thread->id)}}" method="post">
-                            {{csrf_field()}}
-                            <div class="form-group">
-                            <textarea style="width: 100%" name="body" id="body" placeholder="Have something to say ?"
-                                      rows="5"></textarea>
-                            </div>
 
-                            <button class="btn btn-default" type="submit">post</button>
-                        </form>
-                    </div>
-                    <div v-else>
-
-                        <p class="text-center"> Please <a href="{{route('login')}}">sign in</a> to participate in this
-                            discussion.</p>
-                    </div>
-
-
-                </div>
-            </div>
-        </div>
     </thread-view>
 @endsection

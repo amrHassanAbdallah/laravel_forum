@@ -8,11 +8,6 @@
             return {
                 repliesCount: this.initialRepliesCount
             }
-        },
-        computed: {
-            signedIn() {
-                return window.App.signedIn;
-            }
         }
     }
 </script>
