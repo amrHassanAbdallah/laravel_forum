@@ -5,7 +5,7 @@
             <div class="level row">
                 <div class="col-sm-10">
                     <a :href="'/profiles/'+data.owner.name" v-text="data.owner.name"> </a>
-                    said {{data.created_at}}
+                    said <span v-text="ago"></span>
 
                 </div>
                 <div v-if="signedIn">
@@ -39,6 +39,7 @@
 
 <script>
     import Favorite from './Favorite';
+    import moment from 'moment';
 
     export default {
         props: ['data'],
@@ -54,6 +55,9 @@
         computed: {
             signedIn() {
                 return window.App.signedIn;
+            },
+            ago() {
+                return moment(this.data.created_at).fromNow()
             },
             canUpdate() {
                 return this.authorize(user => this.data.user_id == user.id);

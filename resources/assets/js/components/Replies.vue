@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div v-for="(reply,index) in items">
+        <div :key="reply.id" v-for="(reply,index) in items">
             <reply :data="reply" @deleted="remove(index)"></reply>
         </div>
         <new-reply :endpoint="endpoint" @created="add"></new-reply>
@@ -12,12 +12,12 @@
     import NewReply from './NewReply.vue';
 
     export default {
-        props: ['data'],
+        props: ['data', 'thread_id'],
         components: {Reply, NewReply},
         data() {
             return {
                 items: this.data,
-                endpoint: location.pathname + '/replies'
+                endpoint: `${location.origin}/threads/${this.thread_id}/replies`
             }
         },
 

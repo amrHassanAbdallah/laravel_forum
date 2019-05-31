@@ -1,7 +1,7 @@
 <template>
     <div class="container">
         <div class="row">
-            <div class="col-md-10" style="margin-top: 10px">
+            <div class="col-md-12" style="margin-top: 10px">
                 <div v-if="signedIn">
 
                     <div class="form-group">
@@ -33,11 +33,14 @@
         },
         methods: {
             addReply() {
-                axios.post(this.edpont, {body: this.body}).then(({data}) => {
-                    this.body = '';
-                    this.$emit('created', data);
-                    flash("Your reply has been posted.");
-                });
+                if (this.body) {
+                    axios.post(this.endpoint, {body: this.body}).then(({data}) => {
+                        this.body = '';
+                        this.$emit('created', data);
+                        flash("Your reply has been posted.");
+                    });
+
+                }
             }
         },
         computed: {
@@ -48,6 +51,3 @@
     }
 </script>
 
-<style scoped>
-
-</style>

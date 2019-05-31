@@ -6,7 +6,8 @@
             <div class="row ">
                 <div class="col-md-10">
                     @include('threads.thread_temp')
-                    <replies :data="{{$thread->replies}}" @removed="repliesCount--" @added="repliesCount++"></replies>
+                    <replies :thread_id="{{$thread->id}}" :data="{{$thread->replies}}" @removed="repliesCount--"
+                             @added="repliesCount++"></replies>
                     {{--    @foreach($replies as $reply)
                             @include('threads.reply')
                         @endforeach
